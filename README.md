@@ -1,0 +1,1 @@
+GIT repository for Inventory Management System as Class project for CS3104
