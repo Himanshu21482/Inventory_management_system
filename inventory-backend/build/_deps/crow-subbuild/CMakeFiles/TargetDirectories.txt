@@ -1,0 +1,3 @@
+C:/CS3104/inventory-backend/build/_deps/crow-subbuild/CMakeFiles/crow-populate.dir
+C:/CS3104/inventory-backend/build/_deps/crow-subbuild/CMakeFiles/edit_cache.dir
+C:/CS3104/inventory-backend/build/_deps/crow-subbuild/CMakeFiles/rebuild_cache.dir
