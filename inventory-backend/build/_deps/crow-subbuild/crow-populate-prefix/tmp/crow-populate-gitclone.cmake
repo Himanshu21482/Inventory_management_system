@@ -36,7 +36,7 @@ set(number_of_tries 0)
 while(error_code AND number_of_tries LESS 3)
   execute_process(
     COMMAND "C:/Program Files/Git/cmd/git.exe"
-            clone --no-checkout --config "advice.detachedHead=false" "https://github.com/CrowCpp/Crow.git" "crow-src"
+            clone --no-checkout --config "advice.detachedHead=false" -c http.sslVerify=false "https://github.com/CrowCpp/Crow.git" "crow-src"
     WORKING_DIRECTORY "C:/CS3104/inventory-backend/build/_deps"
     RESULT_VARIABLE error_code
     ${maybe_show_command}
@@ -64,7 +64,7 @@ endif()
 set(init_submodules TRUE)
 if(init_submodules)
   execute_process(
-    COMMAND "C:/Program Files/Git/cmd/git.exe" 
+    COMMAND "C:/Program Files/Git/cmd/git.exe" -c;http.sslVerify=false
             submodule update --recursive --init 
     WORKING_DIRECTORY "C:/CS3104/inventory-backend/build/_deps/crow-src"
     RESULT_VARIABLE error_code

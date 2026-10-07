@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/CS3104/inventory-backend/build/_deps/json-subbuild/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

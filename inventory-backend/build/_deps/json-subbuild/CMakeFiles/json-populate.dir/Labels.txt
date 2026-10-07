@@ -1,0 +1,14 @@
+# Target labels
+ json-populate
+# Source files and their labels
+C:/CS3104/inventory-backend/build/_deps/json-subbuild/CMakeFiles/json-populate
+C:/CS3104/inventory-backend/build/_deps/json-subbuild/CMakeFiles/json-populate.rule
+C:/CS3104/inventory-backend/build/_deps/json-subbuild/CMakeFiles/json-populate-complete.rule
+C:/CS3104/inventory-backend/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-build.rule
+C:/CS3104/inventory-backend/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-configure.rule
+C:/CS3104/inventory-backend/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-download.rule
+C:/CS3104/inventory-backend/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-install.rule
+C:/CS3104/inventory-backend/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-mkdir.rule
+C:/CS3104/inventory-backend/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-patch.rule
+C:/CS3104/inventory-backend/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-test.rule
+C:/CS3104/inventory-backend/build/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-update.rule

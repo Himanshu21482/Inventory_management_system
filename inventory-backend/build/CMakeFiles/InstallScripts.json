@@ -1,0 +1,9 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/CS3104/inventory-backend/build/cmake_install.cmake",
+		"C:/CS3104/inventory-backend/build/_deps/crow-build/cmake_install.cmake",
+		"C:/CS3104/inventory-backend/build/_deps/json-build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

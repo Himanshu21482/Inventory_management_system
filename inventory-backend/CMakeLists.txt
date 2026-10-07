@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(inventory_backend LANGUAGES CXX)
+project(inventory_backend LANGUAGES CXX C)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -23,10 +23,27 @@ set(ASIO_INCLUDE_DIR "${asio_SOURCE_DIR}/asio/include" CACHE PATH "Standalone As
 
 FetchContent_Declare(Crow GIT_REPOSITORY https://github.com/CrowCpp/Crow.git GIT_TAG v1.2.1)
 FetchContent_MakeAvailable(Crow)
+set(CMAKE_TLS_VERIFY OFF) # Fix for SSL verification error
 FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download/v3.11.3/json.tar.xz)
 FetchContent_MakeAvailable(json)
-find_package(SQLite3 REQUIRED)
+
+# Fetch SQLite3 directly instead of using find_package
+FetchContent_Declare(
+    sqlite3
+    URL https://www.sqlite.org/2024/sqlite-amalgamation-3450300.zip
+)
+FetchContent_GetProperties(sqlite3)
+if(NOT sqlite3_POPULATED)
+    FetchContent_Populate(sqlite3)
+endif()
+
+add_library(sqlite3_lib STATIC ${sqlite3_SOURCE_DIR}/sqlite3.c)
+target_include_directories(sqlite3_lib PUBLIC ${sqlite3_SOURCE_DIR})
+add_library(SQLite::SQLite3 ALIAS sqlite3_lib)
 
 add_executable(inventory-backend src/main.cpp src/database/database.cpp src/services/stock_service.cpp)
 target_link_libraries(inventory-backend PRIVATE Crow::Crow nlohmann_json::nlohmann_json SQLite::SQLite3)
+if(WIN32)
+    target_link_libraries(inventory-backend PRIVATE ws2_32 wsock32)
+endif()
 target_compile_options(inventory-backend PRIVATE -Wall -Wextra -Wpedantic)

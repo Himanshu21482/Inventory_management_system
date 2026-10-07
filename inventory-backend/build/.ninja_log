@@ -1,0 +1,11 @@
+# ninja log v7
+28	2514	8131162931175209	CMakeFiles/inventory-backend.dir/src/database/database.cpp.obj	82579a551a72aa7f
+40	6145	8131162931295166	CMakeFiles/inventory-backend.dir/src/services/stock_service.cpp.obj	300c1d023eb43784
+8	10400	8131162930963319	CMakeFiles/sqlite3_lib.dir/_deps/sqlite3-src/sqlite3.c.obj	85c71c813b1f9840
+10403	10858	8131163034921915	libsqlite3_lib.a	87a5cce7be5fe4ef
+48	19813	8131163489334248	CMakeFiles/inventory-backend.dir/src/main.cpp.obj	9ed0b9adefd945e5
+35	6795	8131164068040538	build.ninja	6cd04ed5eadb829b
+35	6795	8131164068040538	C:/CS3104/inventory-backend/build/cmake_install.cmake	6cd04ed5eadb829b
+35	6795	8131164068040538	C:/CS3104/inventory-backend/build/_deps/crow-build/cmake_install.cmake	6cd04ed5eadb829b
+35	6795	8131164068040538	C:/CS3104/inventory-backend/build/_deps/json-build/cmake_install.cmake	6cd04ed5eadb829b
+42	761	8131164068946341	inventory-backend.exe	f74827a4d31d707f

@@ -56,7 +56,7 @@ int main() {
             data["status"] = "ok";
             return inventory::response::success(std::move(data));
         });
-        CROW_ROUTE(app, "/api/<path>").methods(crow::HTTPMethod::Options)([] {
+        CROW_ROUTE(app, "/api/<path>").methods(crow::HTTPMethod::Options)([](const std::string& /*path*/) {
             return crow::response(204);
         });
         inventory::routes::registerAuthRoutes(app, database, tokens);

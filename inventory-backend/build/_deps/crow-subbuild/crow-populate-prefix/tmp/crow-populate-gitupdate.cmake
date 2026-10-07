@@ -308,7 +308,7 @@ set(init_submodules "TRUE")
 if(init_submodules)
   execute_process(
     COMMAND "C:/Program Files/Git/cmd/git.exe"
-            --git-dir=.git 
+            --git-dir=.git -c;http.sslVerify=false
             submodule update --recursive --init 
     WORKING_DIRECTORY "C:/CS3104/inventory-backend/build/_deps/crow-src"
     COMMAND_ERROR_IS_FATAL ANY

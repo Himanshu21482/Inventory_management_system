@@ -1,0 +1,14 @@
+# Target labels
+ asio-populate
+# Source files and their labels
+C:/CS3104/inventory-backend/build/_deps/asio-subbuild/CMakeFiles/asio-populate
+C:/CS3104/inventory-backend/build/_deps/asio-subbuild/CMakeFiles/asio-populate.rule
+C:/CS3104/inventory-backend/build/_deps/asio-subbuild/CMakeFiles/asio-populate-complete.rule
+C:/CS3104/inventory-backend/build/_deps/asio-subbuild/asio-populate-prefix/src/asio-populate-stamp/asio-populate-build.rule
+C:/CS3104/inventory-backend/build/_deps/asio-subbuild/asio-populate-prefix/src/asio-populate-stamp/asio-populate-configure.rule
+C:/CS3104/inventory-backend/build/_deps/asio-subbuild/asio-populate-prefix/src/asio-populate-stamp/asio-populate-download.rule
+C:/CS3104/inventory-backend/build/_deps/asio-subbuild/asio-populate-prefix/src/asio-populate-stamp/asio-populate-install.rule
+C:/CS3104/inventory-backend/build/_deps/asio-subbuild/asio-populate-prefix/src/asio-populate-stamp/asio-populate-mkdir.rule
+C:/CS3104/inventory-backend/build/_deps/asio-subbuild/asio-populate-prefix/src/asio-populate-stamp/asio-populate-patch.rule
+C:/CS3104/inventory-backend/build/_deps/asio-subbuild/asio-populate-prefix/src/asio-populate-stamp/asio-populate-test.rule
+C:/CS3104/inventory-backend/build/_deps/asio-subbuild/asio-populate-prefix/src/asio-populate-stamp/asio-populate-update.rule

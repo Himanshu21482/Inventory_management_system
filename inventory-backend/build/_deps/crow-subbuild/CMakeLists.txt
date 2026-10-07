@@ -15,6 +15,7 @@ unset(ENV{CMAKE_TOOLCHAIN_FILE})
 
 project(crow-populate NONE)
 
+set(CMAKE_TLS_VERIFY [==[OFF]==])
 
 # Pass through things we've already detected in the main project to avoid
 # paying the cost of redetecting them again in ExternalProject_Add()

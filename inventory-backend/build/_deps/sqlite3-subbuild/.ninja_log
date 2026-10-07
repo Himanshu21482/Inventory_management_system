@@ -1,0 +1,21 @@
+# ninja log v7
+3	123	8131160921982777	sqlite3-populate-prefix/src/sqlite3-populate-stamp/sqlite3-populate-mkdir	7d38a71cf0f2b3cf
+3	123	8131160921982777	C:/CS3104/inventory-backend/build/_deps/sqlite3-subbuild/sqlite3-populate-prefix/src/sqlite3-populate-stamp/sqlite3-populate-mkdir	7d38a71cf0f2b3cf
+123	4414	8131160964902033	sqlite3-populate-prefix/src/sqlite3-populate-stamp/sqlite3-populate-download	e9bdf47eae0b0469
+123	4414	8131160964902033	C:/CS3104/inventory-backend/build/_deps/sqlite3-subbuild/sqlite3-populate-prefix/src/sqlite3-populate-stamp/sqlite3-populate-download	e9bdf47eae0b0469
+4414	4528	8131160966036964	sqlite3-populate-prefix/src/sqlite3-populate-stamp/sqlite3-populate-update	631facef16daff50
+4414	4528	8131160966036964	C:/CS3104/inventory-backend/build/_deps/sqlite3-subbuild/sqlite3-populate-prefix/src/sqlite3-populate-stamp/sqlite3-populate-update	631facef16daff50
+4529	4646	8131160967222674	sqlite3-populate-prefix/src/sqlite3-populate-stamp/sqlite3-populate-patch	80effd0d29deb447
+4529	4646	8131160967222674	C:/CS3104/inventory-backend/build/_deps/sqlite3-subbuild/sqlite3-populate-prefix/src/sqlite3-populate-stamp/sqlite3-populate-patch	80effd0d29deb447
+4646	4757	8131160968328829	sqlite3-populate-prefix/src/sqlite3-populate-stamp/sqlite3-populate-configure	6721d187c4322431
+4646	4757	8131160968328829	C:/CS3104/inventory-backend/build/_deps/sqlite3-subbuild/sqlite3-populate-prefix/src/sqlite3-populate-stamp/sqlite3-populate-configure	6721d187c4322431
+4758	4871	8131160969474971	sqlite3-populate-prefix/src/sqlite3-populate-stamp/sqlite3-populate-build	4b02b36c53a80974
+4758	4871	8131160969474971	C:/CS3104/inventory-backend/build/_deps/sqlite3-subbuild/sqlite3-populate-prefix/src/sqlite3-populate-stamp/sqlite3-populate-build	4b02b36c53a80974
+4871	4984	8131160970600413	sqlite3-populate-prefix/src/sqlite3-populate-stamp/sqlite3-populate-install	2fedb0761ca17dc5
+4871	4984	8131160970600413	C:/CS3104/inventory-backend/build/_deps/sqlite3-subbuild/sqlite3-populate-prefix/src/sqlite3-populate-stamp/sqlite3-populate-install	2fedb0761ca17dc5
+4984	5103	8131160971781171	sqlite3-populate-prefix/src/sqlite3-populate-stamp/sqlite3-populate-test	7cdd55855104a949
+4984	5103	8131160971781171	C:/CS3104/inventory-backend/build/_deps/sqlite3-subbuild/sqlite3-populate-prefix/src/sqlite3-populate-stamp/sqlite3-populate-test	7cdd55855104a949
+5103	5258	8131160973346062	CMakeFiles/sqlite3-populate-complete	d80edc65665dcb4d
+5103	5258	8131160973346062	sqlite3-populate-prefix/src/sqlite3-populate-stamp/sqlite3-populate-done	d80edc65665dcb4d
+5103	5258	8131160973346062	C:/CS3104/inventory-backend/build/_deps/sqlite3-subbuild/CMakeFiles/sqlite3-populate-complete	d80edc65665dcb4d
+5103	5258	8131160973346062	C:/CS3104/inventory-backend/build/_deps/sqlite3-subbuild/sqlite3-populate-prefix/src/sqlite3-populate-stamp/sqlite3-populate-done	d80edc65665dcb4d
