@@ -2,6 +2,9 @@
 #include "middleware/auth.hpp"
 #include "middleware/cors.hpp"
 #include "routes/auth.hpp"
+#include "routes/categories.hpp"
+#include "routes/items.hpp"
+#include "routes/suppliers.hpp"
 
 #include <crow.h>
 #include <fstream>
@@ -42,6 +45,9 @@ int main() {
             return crow::response(204);
         });
         inventory::routes::registerAuthRoutes(app, database, tokens);
+        inventory::routes::registerCategoryRoutes(app, database, tokens);
+        inventory::routes::registerSupplierRoutes(app, database, tokens);
+        inventory::routes::registerItemRoutes(app, database, tokens);
         std::cout << "Inventory backend listening on http://localhost:8080\n";
         app.port(8080).multithreaded().run();
     } catch (const std::exception &error) {
