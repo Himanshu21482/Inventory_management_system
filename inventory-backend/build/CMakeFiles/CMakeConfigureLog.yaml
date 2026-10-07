@@ -10041,3 +10041,102 @@ events:
         - "C:/Users/Himanshu/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64"
         - "C:/Program Files (x86)/inventory_backend"
 ...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Users/Himanshu/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/share/cmake-4.3/Modules/FindPython/Support.cmake:2563 (find_program)"
+      - "C:/Users/Himanshu/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/share/cmake-4.3/Modules/FindPython3.cmake:671 (include)"
+      - "build/_deps/crow-src/CMakeLists.txt:40 (find_package)"
+    mode: "program"
+    variable: "_Python3_EXECUTABLE_DEBUG"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "python3.14_d"
+      - "python3_d"
+      - "python_d"
+    candidate_directories:
+      - "C:/Users/Himanshu/AppData/Local/Python/pythoncore-3.14-64/"
+    searched_directories:
+      - "C:/Users/Himanshu/AppData/Local/Python/pythoncore-3.14-64/python3.14_d.com"
+      - "C:/Users/Himanshu/AppData/Local/Python/pythoncore-3.14-64/python3.14_d.exe"
+      - "C:/Users/Himanshu/AppData/Local/Python/pythoncore-3.14-64/python3.14_d"
+      - "C:/Users/Himanshu/AppData/Local/Python/pythoncore-3.14-64/python3_d.com"
+      - "C:/Users/Himanshu/AppData/Local/Python/pythoncore-3.14-64/python3_d.exe"
+      - "C:/Users/Himanshu/AppData/Local/Python/pythoncore-3.14-64/python3_d"
+      - "C:/Users/Himanshu/AppData/Local/Python/pythoncore-3.14-64/python_d.com"
+      - "C:/Users/Himanshu/AppData/Local/Python/pythoncore-3.14-64/python_d.exe"
+      - "C:/Users/Himanshu/AppData/Local/Python/pythoncore-3.14-64/python_d"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\OpenSSH\\"
+        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Python314\\Scripts\\"
+        - "C:\\Python314\\"
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Program Files\\nodejs\\"
+        - "C:\\Users\\Himanshu\\scoop\\apps\\mpv\\current"
+        - "C:\\Users\\Himanshu\\scoop\\apps\\git\\current\\cmd"
+        - "C:\\Users\\Himanshu\\scoop\\shims"
+        - "C:\\Users\\Himanshu\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\Himanshu\\AppData\\Local\\Programs\\Antigravity IDE\\bin"
+        - "C:\\Users\\Himanshu\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Program Files\\JetBrains\\WebStorm 2026.1.2\\bin"
+        - "C:\\Program Files\\JetBrains\\PyCharm 2026.1.2\\bin"
+        - "C:\\Users\\Himanshu\\AppData\\Roaming\\npm"
+        - "C:\\Users\\Himanshu\\AppData\\Local\\Python\\bin"
+        - "C:\\Users\\Himanshu\\develop\\flutter\\bin"
+        - "C:\\Program Files\\Java\\jdk-26.0.1\\bin"
+        - "C:\\Users\\Himanshu\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "C:\\Users\\Himanshu\\AppData\\Local\\Microsoft\\WinGet\\Packages\\yt-dlp.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-N-124279-"
+        - "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\"
+        - "C:\\Program Files\\Docker\\Docker\\resources\\bin"
+        - "C:\\Program Files\\Tailscale\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files\\k6\\"
+        - "C:\\Users\\Himanshu\\.local\\bin"
+        - "C:\\Users\\Himanshu\\scoop\\apps\\mpv\\current"
+        - "C:\\Users\\Himanshu\\scoop\\apps\\git\\current\\cmd"
+        - "C:\\Users\\Himanshu\\scoop\\shims"
+        - "C:\\Users\\Himanshu\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\Himanshu\\AppData\\Local\\Programs\\Antigravity IDE\\bin"
+        - "C:\\Users\\Himanshu\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Program Files\\JetBrains\\WebStorm 2026.1.2\\bin"
+        - "C:\\Program Files\\JetBrains\\PyCharm 2026.1.2\\bin"
+        - "C:\\Users\\Himanshu\\AppData\\Roaming\\npm"
+        - "C:\\Users\\Himanshu\\AppData\\Local\\Python\\bin"
+        - "C:\\Users\\Himanshu\\develop\\flutter\\bin"
+        - "C:\\Program Files\\Java\\jdk-26.0.1\\bin"
+        - "C:\\Users\\Himanshu\\AppData\\Local\\Microsoft\\WinGet\\Links"
+        - "C:\\Users\\Himanshu\\AppData\\Local\\Microsoft\\WinGet\\Packages\\yt-dlp.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-N-124279-g0f6ba39122-win64-gpl\\bin"
+        - "C:\\Program Files\\Git\\bin"
+        - "C:\\Users\\Himanshu\\AppData\\Local\\Android\\Sdk\\platform-tools"
+        - "C:\\Users\\Himanshu\\AppData\\Local\\Android\\Sdk\\emulator"
+        - "C:\\Users\\Himanshu\\AppData\\Local\\Programs\\Ollama"
+        - "C:\\Users\\Himanshu\\AppData\\AndroidCLI"
+        - "C:\\Users\\Himanshu\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin"
+        - "C:\\Program Files (x86)\\Nmap"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/inventory_backend"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Users/Himanshu/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64"
+        - "C:/Program Files (x86)/inventory_backend"
+...

@@ -3,6 +3,7 @@
 #include "middleware/cors.hpp"
 #include "routes/auth.hpp"
 #include "routes/categories.hpp"
+#include "routes/dashboard.hpp"
 #include "routes/items.hpp"
 #include "routes/suppliers.hpp"
 #include "routes/stock.hpp"
@@ -30,12 +31,23 @@ void initializeSchema(sqlite3 *db) {
         throw std::runtime_error("Schema initialization failed: " + message);
     }
 }
+
+void initializeSeed(sqlite3 *db) {
+    const auto sql = readFile("seed.sql");
+    char *error = nullptr;
+    if (sqlite3_exec(db, sql.c_str(), nullptr, nullptr, &error) != SQLITE_OK) {
+        const std::string message = error ? error : sqlite3_errmsg(db);
+        sqlite3_free(error);
+        throw std::runtime_error("Seed initialization failed: " + message);
+    }
+}
 }
 
 int main() {
     try {
         inventory::Database database("inventory.db");
         initializeSchema(database.get());
+        initializeSeed(database.get());
         inventory::TokenStore tokens;
         inventory::StockService stockService(database);
         crow::App<CorsMiddleware> app;
@@ -52,6 +64,7 @@ int main() {
         inventory::routes::registerSupplierRoutes(app, database, tokens);
         inventory::routes::registerItemRoutes(app, database, tokens);
         inventory::routes::registerStockRoutes(app, stockService, tokens);
+        inventory::routes::registerDashboardRoutes(app, database, tokens);
         std::cout << "Inventory backend listening on http://localhost:8080\n";
         app.port(8080).multithreaded().run();
     } catch (const std::exception &error) {
