@@ -5,12 +5,14 @@
 #include "routes/categories.hpp"
 #include "routes/items.hpp"
 #include "routes/suppliers.hpp"
+#include "routes/stock.hpp"
 
 #include <crow.h>
 #include <fstream>
 #include <iostream>
 #include <iterator>
 #include <stdexcept>
+#include <utility>
 
 namespace {
 std::string readFile(const std::string &path) {
@@ -35,6 +37,7 @@ int main() {
         inventory::Database database("inventory.db");
         initializeSchema(database.get());
         inventory::TokenStore tokens;
+        inventory::StockService stockService(database);
         crow::App<CorsMiddleware> app;
         CROW_ROUTE(app, "/api/health").methods(crow::HTTPMethod::Get)([] {
             crow::json::wvalue data;
@@ -48,6 +51,7 @@ int main() {
         inventory::routes::registerCategoryRoutes(app, database, tokens);
         inventory::routes::registerSupplierRoutes(app, database, tokens);
         inventory::routes::registerItemRoutes(app, database, tokens);
+        inventory::routes::registerStockRoutes(app, stockService, tokens);
         std::cout << "Inventory backend listening on http://localhost:8080\n";
         app.port(8080).multithreaded().run();
     } catch (const std::exception &error) {

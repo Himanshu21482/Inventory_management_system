@@ -2,7 +2,9 @@
 #include "../database/sqlite.hpp"
 
 #include <mutex>
+#include <limits>
 #include <stdexcept>
+#include <utility>
 
 namespace inventory {
 StockResult StockService::move(int itemId, int amount, const std::string &type,
@@ -17,6 +19,8 @@ StockResult StockService::move(int itemId, int amount, const std::string &type,
         if (sqlite3_step(lookup.get()) != SQLITE_ROW) return {false, "ITEM_NOT_FOUND", 0};
         const int before = sqlite3_column_int(lookup.get(), 0);
         if (type == "OUT" && before < amount) return {false, "INSUFFICIENT_STOCK", before};
+        if (type == "IN" && amount > std::numeric_limits<int>::max() - before)
+            return {false, "QUANTITY_LIMIT", before};
 
         auto update = sql::prepare(database_.get(), type == "IN"
             ? "UPDATE items SET quantity=quantity+? WHERE id=?"

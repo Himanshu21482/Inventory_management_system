@@ -14,6 +14,6 @@ FetchContent_Declare(json URL https://github.com/nlohmann/json/releases/download
 FetchContent_MakeAvailable(json)
 find_package(SQLite3 REQUIRED)
 
-add_executable(inventory-backend src/main.cpp src/database/database.cpp)
+add_executable(inventory-backend src/main.cpp src/database/database.cpp src/services/stock_service.cpp)
 target_link_libraries(inventory-backend PRIVATE Crow::Crow nlohmann_json::nlohmann_json SQLite::SQLite3)
 target_compile_options(inventory-backend PRIVATE -Wall -Wextra -Wpedantic)
