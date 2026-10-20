@@ -12,6 +12,12 @@ A small REST API for tracking products, suppliers, stock changes, and low-stock 
 - Low-stock list and dashboard totals with the five latest movements
 - CORS access for `http://localhost:5173` and `http://localhost:3000`
 
+## Static frontend
+
+The `frontend/` folder contains a no-build HTML, CSS, and JavaScript interface for the API. The backend serves it at `http://localhost:8080`, so no separate frontend server is required. See [frontend/README.md](frontend/README.md) for details.
+
+The GET CORS headers are configured for `localhost:5173` and `localhost:3000`. The live OPTIONS preflight check currently returns 204 without `Access-Control-Allow-Origin` because Crow completes OPTIONS before the request origin is available to this middleware. The included UI avoids that limitation by using the same origin at `localhost:8080`.
+
 ## Requirements
 
 - CMake 3.20 or later

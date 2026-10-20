@@ -51,13 +51,25 @@ int main() {
         inventory::TokenStore tokens;
         inventory::StockService stockService(database);
         crow::App<CorsMiddleware> app;
+        CROW_ROUTE(app, "/").methods(crow::HTTPMethod::Get)([] {
+            crow::response page(readFile("frontend/index.html"));
+            page.set_header("Content-Type", "text/html; charset=utf-8");
+            return page;
+        });
+        CROW_ROUTE(app, "/styles.css").methods(crow::HTTPMethod::Get)([] {
+            crow::response style(readFile("frontend/styles.css"));
+            style.set_header("Content-Type", "text/css; charset=utf-8");
+            return style;
+        });
+        CROW_ROUTE(app, "/app.js").methods(crow::HTTPMethod::Get)([] {
+            crow::response script(readFile("frontend/app.js"));
+            script.set_header("Content-Type", "application/javascript; charset=utf-8");
+            return script;
+        });
         CROW_ROUTE(app, "/api/health").methods(crow::HTTPMethod::Get)([] {
             crow::json::wvalue data;
             data["status"] = "ok";
             return inventory::response::success(std::move(data));
-        });
-        CROW_ROUTE(app, "/api/<path>").methods(crow::HTTPMethod::Options)([](const std::string& /*path*/) {
-            return crow::response(204);
         });
         inventory::routes::registerAuthRoutes(app, database, tokens);
         inventory::routes::registerCategoryRoutes(app, database, tokens);
