@@ -2,9 +2,13 @@
 
 ## CS3104 — Class Project
 
-A C++17-based backend system for managing inventory, products, suppliers, categories, stock movements, users, and basic inventory analytics.
+A C++17 inventory management system with a REST API backend, an SQLite database, and a built-in web frontend called **Stockroom**. It manages inventory, products, suppliers, categories, stock movements, users, and basic inventory analytics.
 
-The project provides a REST API that can be consumed by a frontend application such as React. The backend is intentionally kept compact and suitable for a class project while demonstrating important concepts in C++, REST API development, database management, authentication, authorization, and transactional inventory operations.
+The backend serves the Stockroom frontend directly at `http://localhost:8080`, so the whole system (browser → REST API → database) runs end to end with a single executable. The project is deliberately compact for a class project, and demonstrates C++ object-oriented design, REST API development, database management, authentication, authorization, and transactional inventory operations.
+
+**Team:** Himanshu Gunwant (251127) · Raj Aryan Mahato (251145)
+
+**Diagrams:** class, architecture, use case, sequence, and activity diagrams are in [`docs/diagrams/`](docs/diagrams/README.md).
 
 ---
 
@@ -61,8 +65,8 @@ The proposed system uses a backend REST API to provide a single point of access 
 The overall flow is:
 
 ```text
-                    Frontend
-                  (React / Other)
+              Stockroom Frontend
+            (HTML / CSS / JavaScript)
                         |
                         | HTTP + JSON
                         v
@@ -90,7 +94,7 @@ The overall flow is:
               +-------------------+
 ```
 
-The backend separates HTTP handling from inventory business logic and database operations.
+The backend separates HTTP handling from inventory business logic and database operations. The full architecture diagram is in [`docs/diagrams/architecture-diagram.png`](docs/diagrams/architecture-diagram.png).
 
 ---
 
@@ -103,6 +107,8 @@ The backend separates HTTP handling from inventory business logic and database o
 | SQLite | Database |
 | nlohmann/json | JSON request and response handling |
 | CMake | Build system |
+| HTML, CSS, JavaScript | Stockroom web frontend (no framework, no build step) |
+| TikZ (LaTeX) | UML and architecture diagrams |
 | Git | Version control |
 
 The application creates an `inventory.db` SQLite database in the working directory and applies the database schema and seed data when the application starts.
@@ -269,7 +275,7 @@ A dashboard endpoint provides a high-level view of inventory information.
 GET /api/dashboard
 ```
 
-This can be used by a frontend to create an inventory dashboard containing summary information.
+It returns the total number of items, the total stock value, the number of low-stock items, and the five most recent stock movements. The Stockroom Overview page is built from this endpoint.
 
 ---
 
@@ -291,7 +297,17 @@ seed.sql
 
 The application applies these files when it starts.
 
-The database contains the information required for the main inventory operations, including users, categories, suppliers, items, stock, and stock movements.
+The database has five tables:
+
+| Table | Purpose |
+|---|---|
+| `users` | Accounts with a salted password hash and a role (`admin` or `staff`) |
+| `categories` | Product categories |
+| `suppliers` | Supplier contact details |
+| `items` | Products: SKU, name, category, supplier, unit price, current quantity, reorder level |
+| `stock_movements` | Every stock-in and stock-out: item, type, quantity, note, user, timestamp |
+
+The current quantity lives on `items`, and `stock_movements` keeps the full history. Foreign keys link items to categories and suppliers (`ON DELETE SET NULL`), and movements to items (`ON DELETE CASCADE`) and users. `CHECK` constraints reject negative prices or quantities and invalid roles or movement types.
 
 A simplified relationship is:
 
@@ -520,7 +536,7 @@ JSON is used for communication between the backend and frontend.
 Detailed request examples and fields are available in:
 
 ```text
-docs/api.md
+inventory-backend/docs/api.md
 ```
 
 ---
@@ -530,49 +546,58 @@ docs/api.md
 ```text
 (Project Root)
 │
-├── inventory-backend/           <-- C++ Backend Application
-│   ├── README.md
-│   ├── CMakeLists.txt
-│   ├── schema.sql
-│   ├── seed.sql
-│   │
-│   ├── src/
-│   │   ├── main.cpp
-│   │   │
-│   │   ├── routes/
-│   │   │   ├── auth.hpp
-│   │   │   ├── categories.hpp
-│   │   │   ├── suppliers.hpp
-│   │   │   ├── items.hpp
-│   │   │   ├── stock.hpp
-│   │   │   └── dashboard.hpp
-│   │   │
-│   │   ├── services/
-│   │   │   └── stock_service.*
-│   │   │
-│   │   ├── database/
-│   │   │   ├── database.*
-│   │   │   └── ...
-│   │   │
-│   │   ├── middleware/
-│   │   │   ├── cors.*
-│   │   │   ├── auth.*
-│   │   │   └── role.*
-│   │   │
-│   │   └── models/
-│   │       └── ...
-│   │
-│   └── docs/
-│       └── api.md
+├── README.md
+├── docs/
+│   └── diagrams/                 <-- UML + architecture diagrams (PNG, SVG, PDF, TikZ source)
 │
-└── inventory-system/            <-- Frontend Application (To be developed)
+└── inventory-backend/            <-- C++ backend + Stockroom frontend
+    ├── README.md
+    ├── CMakeLists.txt
+    ├── schema.sql
+    ├── seed.sql
+    │
+    ├── docs/
+    │   └── api.md                <-- API reference with request examples
+    │
+    ├── frontend/                 <-- Stockroom web UI, served by the backend
+    │   ├── README.md
+    │   ├── index.html
+    │   ├── styles.css
+    │   └── app.js
+    │
+    └── src/
+        ├── main.cpp
+        ├── routes/
+        │   ├── auth.hpp
+        │   ├── categories.hpp
+        │   ├── suppliers.hpp
+        │   ├── items.hpp
+        │   ├── stock.hpp
+        │   └── dashboard.hpp
+        ├── services/
+        │   ├── stock_service.hpp
+        │   └── stock_service.cpp
+        ├── database/
+        │   ├── database.hpp
+        │   ├── database.cpp
+        │   └── sqlite.hpp
+        ├── middleware/
+        │   ├── cors.hpp
+        │   ├── auth.hpp
+        │   └── authorization.hpp
+        ├── models/
+        │   └── ...
+        └── utils/
+            ├── password.hpp
+            ├── response.hpp
+            └── validation.hpp
 ```
 
 ### Important Components
 
 **`src/main.cpp`**
 
-Starts the application and registers the API routes.
+Opens the database, applies the schema and seed data, registers the API routes, serves the Stockroom frontend files, and starts the server on port 8080.
 
 **`src/routes/`**
 
@@ -588,11 +613,19 @@ Handles SQLite connections, database operations, prepared statements, and transa
 
 **`src/middleware/`**
 
-Contains middleware for CORS, authentication, token lookup, and role checks.
+Contains the CORS middleware, the `TokenStore` used for bearer-token authentication, and the role checks used for authorization.
 
 **`src/models/`**
 
-Contains the domain model definitions.
+Placeholder headers for the domain models (category, item, stock movement, supplier, user).
+
+**`src/utils/`**
+
+Password hashing (salted SHA-256), JSON response helpers, and input validation.
+
+**`frontend/`**
+
+The Stockroom web interface: sign-in, overview dashboard, items, stock movements, categories, suppliers, and team management.
 
 **`schema.sql`**
 
@@ -760,15 +793,20 @@ Seeding is designed to be repeatable.
 
 ---
 
-## Step 9 — Test the API
+## Step 9 — Build the Stockroom Frontend
+
+A static HTML/CSS/JavaScript frontend was built and served by the backend itself, which connects the browser, the REST API, and the database end to end.
+
+---
+
+## Step 10 — Test the API
 
 The API can be tested using tools such as:
 
 ```text
 curl
 Postman
-Browser
-React frontend
+Stockroom frontend (browser)
 ```
 
 The health endpoint can first be used to confirm that the server is running.
@@ -873,6 +911,8 @@ The server runs on:
 http://localhost:8080
 ```
 
+Open this address in a browser to use the Stockroom frontend. Run the executable from the `inventory-backend` folder so it can find `schema.sql`, `seed.sql`, and the `frontend/` files.
+
 To check whether the backend is running:
 
 ```bash
@@ -913,45 +953,41 @@ The credentials are intended only for local college-project demonstrations and s
 
 ---
 
-# 18. Frontend Integration
+# 18. Frontend (Stockroom)
 
-The backend has been designed so that a frontend can be developed separately.
+The project includes a working web frontend, **Stockroom**, in `inventory-backend/frontend/`. It is plain HTML, CSS, and JavaScript, so it has no package dependencies or build step. The C++ backend serves it from the same origin as the API, so there is no separate frontend server and no cross-origin requests.
 
-A React application can communicate with the backend using HTTP requests.
+Pages:
 
-For example:
+| Page | What it does | API used |
+|---|---|---|
+| Sign in | Log in with email and password | `POST /api/auth/login` |
+| Overview | Totals, stock value, low-stock count, recent movements | `GET /api/dashboard` |
+| Items | Search, filter by category, paginate, add, edit, delete items | `/api/items` |
+| Stock movements | Movement history and the "Record stock" dialog | `/api/stock/*` |
+| Categories / Suppliers | Manage master data (admin) | `/api/categories`, `/api/suppliers` |
+| Team | Register admin or staff accounts (admin) | `POST /api/auth/register` |
 
-```text
-React
-  |
-  | GET /api/items
-  v
-C++ Backend
-  |
-  v
-SQLite
-```
-
-For a protected operation:
+End-to-end request flow for a protected operation:
 
 ```text
-React
+Stockroom (browser)
   |
-  | Authorization: Bearer <token>
+  | HTTP + JSON, Authorization: Bearer <token>
   v
-Authentication Middleware
-  |
-  v
-Route
+Crow app + CORS middleware
   |
   v
-Service
+Route handler  -->  TokenStore (authentication) + role check
   |
   v
-Database
+StockService (business rules, transaction)
+  |
+  v
+SQLite (inventory.db)
 ```
 
-The frontend can therefore be developed independently from the backend.
+The bearer token is kept in the browser's local storage and removed when the user signs out. See `inventory-backend/frontend/README.md` for details.
 
 ---
 
@@ -965,6 +1001,8 @@ A basic demonstration workflow can be performed as follows:
 cd inventory-backend
 ./build/inventory-backend
 ```
+
+You can follow the same workflow in the browser at `http://localhost:8080`.
 
 ### 2. Check the server
 
@@ -1030,6 +1068,8 @@ The current implementation uses:
 - SQLite
 - A compact single-process architecture
 
+Secrets are not read from environment variables yet: the token-signing secret is generated randomly when the server starts (so tokens are lost on restart), and the demo administrator password is fixed in `seed.sql`. Reading secrets with `std::getenv` is listed under Future Improvements.
+
 For a production deployment, stronger password hashing such as Argon2 or bcrypt, persistent token management, more comprehensive access control, and a production database would be appropriate.
 
 ---
@@ -1051,6 +1091,7 @@ Possible improvements include:
 
 ### Authentication
 
+- Read secrets (token-signing key, initial admin password) from environment variables with `std::getenv`
 - Refresh tokens
 - Password reset
 - Persistent sessions
@@ -1067,15 +1108,10 @@ Possible improvements include:
 
 ### Frontend
 
-A React frontend could provide:
-
-- Admin dashboard
-- Product management
-- Supplier management
-- Stock management
-- Low-stock alerts
-- Inventory charts
-- User management
+- Inventory charts and trends
+- Low-stock notifications
+- CSV/PDF export from the UI
+- Mobile-friendly layouts
 
 ### Deployment
 
@@ -1093,10 +1129,13 @@ The system could also be extended with:
 
 This project demonstrates several important concepts relevant to computer science and software engineering.
 
-### C++
+### C++ and Object-Oriented Programming
 
 - C++17 programming
-- Classes and objects
+- Classes and objects, encapsulation, and abstraction
+- RAII (`Database`, `sql::Transaction`, statement deleters)
+- Composition and aggregation
+- Function overloading and template-based (static) polymorphism
 - Modular programming
 - Exception/error handling
 - Resource management
@@ -1126,6 +1165,7 @@ This project demonstrates several important concepts relevant to computer scienc
 - Version control
 - Build systems
 - API documentation
+- UML modelling (class, use case, sequence, activity diagrams)
 
 ---
 
@@ -1151,7 +1191,7 @@ Stock Movements
 Reports / Dashboard
 ```
 
-The project combines C++ programming, database management, REST API development, authentication, authorization, and transactional business logic into a single practical application.
+The project combines C++ programming, database management, REST API development, a web frontend, authentication, authorization, and transactional business logic into a single practical application.
 
 As a CS3104 class project, it demonstrates how a real-world problem can be broken down into smaller software components and implemented using a structured backend architecture.
 
@@ -1161,6 +1201,8 @@ As a CS3104 class project, it demonstrates how a real-world problem can be broke
 
 **Course:** CS3104  
 **Project:** Inventory Management System  
+**Team:** Himanshu Gunwant (251127), Raj Aryan Mahato (251145)  
+**Frontend:** Stockroom (HTML, CSS, JavaScript)  
 **Language:** C++17  
 **Backend:** Crow  
 **Database:** SQLite  
