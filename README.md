@@ -536,7 +536,7 @@ JSON is used for communication between the backend and frontend.
 Detailed request examples and fields are available in:
 
 ```text
-inventory-backend/docs/api.md
+inventory-app/docs/api.md
 ```
 
 ---
@@ -550,7 +550,7 @@ inventory-backend/docs/api.md
 ├── docs/
 │   └── diagrams/                 <-- UML + architecture diagrams (PNG, SVG, PDF, TikZ source)
 │
-└── inventory-backend/            <-- C++ backend + Stockroom frontend
+└── inventory-app/                <-- C++ backend + Stockroom frontend
     ├── README.md
     ├── CMakeLists.txt
     ├── schema.sql
@@ -846,7 +846,7 @@ For Windows, Visual Studio Build Tools with the Desktop C++ workload, CMake, Git
 
 First, navigate to the backend directory:
 ```bash
-cd inventory-backend
+cd inventory-app
 ```
 
 Configure the project:
@@ -880,7 +880,7 @@ seed.sql
 
 First, navigate to the backend directory:
 ```powershell
-cd inventory-backend
+cd inventory-app
 ```
 
 Using vcpkg:
@@ -911,7 +911,7 @@ The server runs on:
 http://localhost:8080
 ```
 
-Open this address in a browser to use the Stockroom frontend. Run the executable from the `inventory-backend` folder so it can find `schema.sql`, `seed.sql`, and the `frontend/` files.
+Open this address in a browser to use the Stockroom frontend. Run the executable from the `inventory-app` folder so it can find `schema.sql`, `seed.sql`, and the `frontend/` files.
 
 To check whether the backend is running:
 
@@ -955,7 +955,7 @@ The credentials are intended only for local college-project demonstrations and s
 
 # 18. Frontend (Stockroom)
 
-The project includes a working web frontend, **Stockroom**, in `inventory-backend/frontend/`. It is plain HTML, CSS, and JavaScript, so it has no package dependencies or build step. The C++ backend serves it from the same origin as the API, so there is no separate frontend server and no cross-origin requests.
+The project includes a working web frontend, **Stockroom**, in `inventory-app/frontend/`. It is plain HTML, CSS, and JavaScript, so it has no package dependencies or build step. The C++ backend serves it from the same origin as the API, so there is no separate frontend server and no cross-origin requests.
 
 Pages:
 
@@ -987,7 +987,7 @@ StockService (business rules, transaction)
 SQLite (inventory.db)
 ```
 
-The bearer token is kept in the browser's local storage and removed when the user signs out. See `inventory-backend/frontend/README.md` for details.
+The bearer token is kept in the browser's local storage and removed when the user signs out. See `inventory-app/frontend/README.md` for details.
 
 ---
 
@@ -998,7 +998,7 @@ A basic demonstration workflow can be performed as follows:
 ### 1. Start the backend
 
 ```bash
-cd inventory-backend
+cd inventory-app
 ./build/inventory-backend
 ```
 

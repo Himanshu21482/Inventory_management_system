@@ -4,7 +4,7 @@ A small static HTML, CSS, and JavaScript interface for the Inventory API. It has
 
 ## Run it
 
-Start the backend from the `inventory-backend` folder:
+Start the backend from the `inventory-app` folder:
 
 ```powershell
 .\build\inventory-backend.exe

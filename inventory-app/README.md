@@ -41,7 +41,7 @@ vcpkg install sqlite3 --triplet x64-mingw-dynamic
 
 ## Build and run
 
-Run these commands from the `inventory-backend` directory. Use the same CMake generator for a given build directory. The commands below use Ninja:
+Run these commands from the `inventory-app` directory. Use the same CMake generator for a given build directory. The commands below use Ninja:
 
 ```powershell
 cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
