@@ -114,6 +114,31 @@ From an end-user perspective the system lets a signed-in user:
 nlohmann/json and SQLite~3 (the last three are fetched automatically by CMake), and any
 modern web browser.
 
+\section{Technology Stack}
+Table~\ref{tab:stack} lists the technologies used in each layer of the system.
+
+\begin{table}[H]
+\centering
+\caption{Technology stack}
+\label{tab:stack}
+\small
+\begin{tabular}{@{}l l >{\raggedright\arraybackslash}p{6.4cm}@{}}
+\toprule
+\textbf{Layer} & \textbf{Technology} & \textbf{Purpose} \\
+\midrule
+Language     & C++17                         & Backend implementation: classes, templates, RAII, smart pointers \\
+Web framework& Crow v1.2.1 (with Asio 1.30.2) & HTTP server, routing, middleware and multithreaded request handling \\
+Database     & SQLite 3.45.3                 & Embedded relational database (\texttt{inventory.db}) with transactions \\
+JSON         & nlohmann/json 3.11.3          & Parsing request bodies and building JSON responses \\
+Security     & SHA-256, HMAC-SHA-256         & Salted password hashes and signed 24-hour bearer tokens (implemented in C++) \\
+Concurrency  & \texttt{std::mutex} & Serialised database access from Crow's worker threads \\
+Frontend     & HTML5, CSS3, JavaScript       & Stockroom single-page interface, served by the backend \\
+Build        & CMake 3.20+ with FetchContent & Builds the project and downloads Crow, Asio, JSON and SQLite \\
+Version control & Git and GitHub             & Source hosting and collaboration \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \section{Scope and Feature Set}
 \begin{itemize}
     \item \textbf{Authentication:} users register and log in with email and password.
